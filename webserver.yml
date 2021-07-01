@@ -1,0 +1,34 @@
+---
+- hosts: webserver
+  user: root
+
+  tasks:
+    ##
+    # Instalación de paquetes necesarios
+    ##
+    - name: General | Instalación de paquetes requeridos.
+      action: apt pkg={{ item }} state=installed
+      with_items:
+        - php5
+        - apache2
+        - mysql-server
+        - mysql-client
+        - php5-mysql
+        - php-apc
+        - php5-xmlrpc
+        - php-soap
+        - php5-gd
+        - unzip
+        - python-mysqldb
+
+    ##
+    # Configuración de Apache2
+    ##
+    - name: Apache2 | Habilitar módulos
+      action: command a2enmod rewrite vhost_alias
+
+   ##
+   # Reinicio de servicios
+   ##
+    - name: Restart Apache
+      action: service name=apache2 state=restarted

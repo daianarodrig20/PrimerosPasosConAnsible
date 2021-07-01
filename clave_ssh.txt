@@ -1,0 +1,13 @@
+# Debemos disponer de una autenticación por llave SSH con el nodo.
+# Para ello abrimos una consola en la máquina central y ejecutamos el
+# comando
+
+ssh-keygen
+
+# Una vez finalizado el proceso de generación disponemos de 2 ficheros
+# - ~/.ssh/id_rsa
+# - ~/.ssh/id_rsa.pub
+# Copio la llave pública al nodo:
+ssh-copy-ip -i ~/.ssh/id_rsa.pub root@192.168.101.104
+
+
